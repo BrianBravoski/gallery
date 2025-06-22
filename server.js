@@ -20,10 +20,10 @@ mongoose.connect(MONGODB_URI,{ useNewUrlParser: true , useUnifiedTopology: true 
 });
 
 // test if the database has connected successfully
-let db = mongoose.connection;
-db.once('open', ()=>{
-    console.log('Database connected successfully')
-})
+// let db = mongoose.connection;
+// db.once('open', ()=>{
+//     console.log('Database connected successfully')
+// })
 
 
 
@@ -47,3 +47,6 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT,() =>{
     console.log(`Server is listening at http://localhost:${PORT}`)
 });
+
+
+module.exports = app;
