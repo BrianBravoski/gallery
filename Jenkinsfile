@@ -16,6 +16,7 @@ pipeline {
         EMAIL_SUBJECT_FAILURE = "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
         EMAIL_RECIPIENTS = 'brianbravoski28@gmail.com'
         LIVE_SITE = 'https://gallery-bdr7.onrender.com'
+        RENDER_DEPLOY_HOOK = credential('render_hook')
     }
     tools {
         nodejs 'nodejs'
@@ -34,12 +35,17 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'npm run build'
+                sh 'npm build'
             }
         }
         stage('Test') {
             steps {
                 sh 'npm test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh "curl -X POST ${RENDER_DEPLOY_HOOK}"
             }
         }
     }
@@ -49,17 +55,17 @@ pipeline {
                 color: 'good',
                 message: "Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER} - <${LIVE_SITE}|View Live Site>"
             )
-            mail(
-                to: EMAIL_RECIPIENTS,
-                subject: EMAIL_SUBJECT_SUCCESS,
-                body: EMAIL_TEXT,
-            )
+            // mail(
+            //     to: EMAIL_RECIPIENTS,
+            //     subject: EMAIL_SUBJECT_SUCCESS,
+            //     body: EMAIL_TEXT,
+            // )
         }
         failure {
-            slackSend(
-                color: 'danger',
-                message: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER} - <${LIVE_SITE}|View Live Site>"
-            )
+            // slackSend(
+            //     color: 'danger',
+            //     message: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER} - <${LIVE_SITE}|View Live Site>"
+            // )
             mail(
             to: EMAIL_RECIPIENTS,
             subject: EMAIL_SUBJECT_FAILURE,
