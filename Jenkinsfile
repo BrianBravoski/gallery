@@ -18,7 +18,7 @@ pipeline {
         LIVE_SITE = 'https://gallery-bdr7.onrender.com'
     }
     tools {
-        nodejs 'NodeJS-18'
+        nodejs 'nodejs'
     }
 
     stages {
