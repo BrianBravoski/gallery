@@ -45,6 +45,10 @@ pipeline {
     }
     post {
         success {
+            slack(
+                color: 'good',
+                message: "Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER} - <${LIVE_SITE}|View Live Site>"
+            )
             mail(
                 to: EMAIL_RECIPIENTS,
                 subject: EMAIL_SUBJECT_SUCCESS,
@@ -52,6 +56,10 @@ pipeline {
             )
         }
         failure {
+            slack(
+                color: 'danger',
+                message: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER} - <${LIVE_SITE}|View Live Site>"
+            )
             mail(
             to: EMAIL_RECIPIENTS,
             subject: EMAIL_SUBJECT_FAILURE,
