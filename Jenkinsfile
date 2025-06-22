@@ -3,14 +3,14 @@ pipeline {
     environment {
         EMAIL_TEXT =
        """
-         <h1>Build Notification</h1>
-            <p>Build Status: ${currentBuild.currentResult}</p>
-            <p>Project: ${env.JOB_NAME}</p>
-            <p>Build Number: ${env.BUILD_NUMBER}</p>
-            <p>Build URL: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
-            <p>Branch: ${env.GIT_BRANCH}</p>
-            <p>Commit: ${env.GIT_COMMIT}</p>
-            <p>Commit Message: ${env.GIT_COMMIT_MESSAGE}</p>
+         Build Notification
+            Build Status: ${currentBuild.currentResult}
+            Project: ${env.JOB_NAME}
+            Build Number: ${env.BUILD_NUMBER}
+            Build URL: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a>
+            Branch: ${env.GIT_BRANCH}
+            Commit: ${env.GIT_COMMIT}
+            Commit Message: ${env.GIT_COMMIT_MESSAGE}
        """
         EMAIL_SUBJECT_SUCCESS = "Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
         EMAIL_SUBJECT_FAILURE = "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
@@ -33,11 +33,11 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage('Build') {
-            steps {
-                sh 'npm build'
-            }
-        }
+        // stage('Build') {
+        //     steps {
+        //         sh 'npm build'
+        //     }
+        // }
         stage('Test') {
             steps {
                 sh 'npm test'
