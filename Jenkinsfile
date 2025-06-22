@@ -45,7 +45,7 @@ pipeline {
     }
     post {
         success {
-            slack(
+            slackSend(
                 color: 'good',
                 message: "Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER} - <${LIVE_SITE}|View Live Site>"
             )
@@ -56,7 +56,7 @@ pipeline {
             )
         }
         failure {
-            slack(
+            slackSend(
                 color: 'danger',
                 message: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER} - <${LIVE_SITE}|View Live Site>"
             )
