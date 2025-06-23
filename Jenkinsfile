@@ -1,20 +1,20 @@
 pipeline {
     agent any
     environment {
-        EMAIL_TEXT =
-       """
-         Build Notification
-            Build Status: ${currentBuild.currentResult}
-            Project: ${env.JOB_NAME}
-            Build Number: ${env.BUILD_NUMBER}
-            Build URL: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a>
-            Branch: ${env.GIT_BRANCH}
-            Commit: ${env.GIT_COMMIT}
-            Commit Message: ${env.GIT_COMMIT_MESSAGE}
-       """
-        EMAIL_SUBJECT_SUCCESS = "Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
-        EMAIL_SUBJECT_FAILURE = "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
-        EMAIL_RECIPIENTS = "kemboidev@gmail.com"
+    //     EMAIL_TEXT =
+    //    """
+    //      Build Notification
+    //         Build Status: ${currentBuild.currentResult}
+    //         Project: ${env.JOB_NAME}
+    //         Build Number: ${env.BUILD_NUMBER}
+    //         Build URL: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a>
+    //         Branch: ${env.GIT_BRANCH}
+    //         Commit: ${env.GIT_COMMIT}
+    //         Commit Message: ${env.GIT_COMMIT_MESSAGE}
+    //    """
+    //     EMAIL_SUBJECT_SUCCESS = "Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
+    //     EMAIL_SUBJECT_FAILURE = "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
+    //     EMAIL_RECIPIENTS = "kemboidev@gmail.com"
         LIVE_SITE = "https://gallery-1-ir52.onrender.com"
         RENDER_DEPLOY_HOOK = credentials('render_hook')
     }
@@ -59,16 +59,15 @@ pipeline {
             // )
         }
         failure {
-            // slackSend(
-            //     color: 'danger',
-            //     message: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER} - <${LIVE_SITE}|View Live Site>"
-            // )
-            mail(
-                to: EMAIL_RECIPIENTS,
-                header:"BrianKemboi IP Build",
-                subject: EMAIL_SUBJECT_FAILURE,
-                body: EMAIL_TEXT,
+            slackSend(
+                color: 'danger',
+                message: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER} - <${LIVE_SITE}|View Live Site>"
             )
+            // mail(
+            //     to: EMAIL_RECIPIENTS,
+            //     subject: EMAIL_SUBJECT_FAILURE,
+            //     body: EMAIL_TEXT,
+            // )
         }
     }
 }
