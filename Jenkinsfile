@@ -53,7 +53,9 @@ pipeline {
         success {
             slackSend(
                 color: 'good',
-                message: "Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER} - <${LIVE_SITE}|View Live Site>"
+                message: "Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}, " +
+                         "Git commit message: ${env.GIT_COMMIT_MESSAGE} - " +
+                         "<${LIVE_SITE}|View Live Site>"
             )
             // mail(
             //     to: EMAIL_RECIPIENTS,
