@@ -64,10 +64,11 @@ pipeline {
             //     message: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER} - <${LIVE_SITE}|View Live Site>"
             // )
             mail(
-            to: EMAIL_RECIPIENTS,
-            subject: EMAIL_SUBJECT_FAILURE,
-            body: EMAIL_TEXT,
-        )
+                to: EMAIL_RECIPIENTS,
+                header:"BrianKemboi IP Build",
+                subject: EMAIL_SUBJECT_FAILURE,
+                body: EMAIL_TEXT,
+            )
         }
     }
 }
