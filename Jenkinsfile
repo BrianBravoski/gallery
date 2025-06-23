@@ -33,11 +33,7 @@ pipeline {
                 sh 'npm install'
             }
         }
-        // stage('Build') {
-        //     steps {
-        //         sh 'npm build'
-        //     }
-        // }
+
         stage('Test') {
             steps {
                 sh 'npm test'
@@ -54,7 +50,6 @@ pipeline {
             slackSend(
                 color: 'good',
                 message: "Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}, " +
-                         "Git commit message: ${env.GIT_COMMIT_MESSAGE} - " +
                          "<${LIVE_SITE}|View Live Site>"
             )
             // mail(
