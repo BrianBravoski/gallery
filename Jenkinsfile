@@ -15,7 +15,7 @@ pipeline {
         EMAIL_SUBJECT_SUCCESS = "Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
         EMAIL_SUBJECT_FAILURE = "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
         EMAIL_RECIPIENTS = "kemboidev@gmail.com"
-        LIVE_SITE = "https://gallery-bdr7.onrender.com"
+        LIVE_SITE = "https://gallery-1-ir52.onrender.com"
         RENDER_DEPLOY_HOOK = credentials('render_hook')
     }
     tools {
